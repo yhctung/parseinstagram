@@ -19,24 +19,46 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            goMainActivity();
+        } else {
+            // show the signup or login screen
+            etUsername = findViewById(R.id.etUsername);
+            etPassword = findViewById(R.id.etPassword);
+            btnLogin = findViewById(R.id.btnLogin);
+            btnSignUp = findViewById(R.id.btnSignUp);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                login(username, password);
-            }
-        });
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String username = etUsername.getText().toString();
+                    String password = etPassword.getText().toString();
+                    login(username, password);
+                }
+            });
+
+            btnSignUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // send to SignupActivity
+                    Log.d(TAG, "Navigating to Signup");
+                    Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                    startActivity(i);
+                    finish();   // finishes LoginActivity, takes it off the stack
+                    // when you press back, now exits app
+                    Log.d(TAG, "finished");
+                }
+            });
+        }
     }
 
     private void login(String username, String password) {
