@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ck.parseinstagram.BitmapScaler;
+import com.ck.parseinstagram.LoginActivity;
 import com.ck.parseinstagram.Post;
 import com.ck.parseinstagram.R;
 import com.parse.ParseException;
@@ -93,7 +94,7 @@ public class ComposeFragment extends Fragment {
             }
         });
 
-        /*
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,11 +103,11 @@ public class ComposeFragment extends Fragment {
                 Log.d(TAG, "Navigating to Login");
                 Intent i = new Intent(getContext(), LoginActivity.class);
                 startActivity(i);
-                finish();   // finishes MainActivity, takes it off the stack
+                //finish();   // finishes MainActivity, takes it off the stack
                 Log.d(TAG, "finished");
             }
         });
-        */
+
 
 
         }
